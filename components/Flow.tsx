@@ -13,6 +13,7 @@ import ReactFlow, {
   Node,
   Edge,
   Controls,
+  useStoreApi,
 } from 'reactflow';
 
 import dagre from '@dagrejs/dagre';
@@ -22,13 +23,13 @@ import { FilmNode, HeroNode, StarshipNode } from '@/types/customNodes';
 
 import 'reactflow/dist/style.css';
 
-const dagreGraph = new dagre.graphlib.Graph();
-dagreGraph.setDefaultEdgeLabel(() => ({}));
-
 const nodeWidth = 220;
 const nodeHeight = 200;
 
 const getLayoutedElements = (nodes: Node[], edges: Edge[], direction = 'LR') => {
+  const dagreGraph = new dagre.graphlib.Graph();
+
+  dagreGraph.setDefaultEdgeLabel(() => ({}));
   dagreGraph.setGraph({ rankdir: direction });
 
   nodes.forEach((node) => {
@@ -66,6 +67,18 @@ const LayoutFlow = ({ initialNodes, initialEdges }: { initialNodes: Node[], init
   const [edges, setEdges, onEdgesChange] = useEdgesState(layoutedEdges);
   const [, setDirection] = useAtom(isHorizontalAtom);
 
+  //Fixing the "It looks like you have created a new nodeTypes or edgeTypes object..." bug
+  const store = useStoreApi();
+
+  if (process.env.NODE_ENV === "development") {
+    store.getState().onError = (code, message) => {
+      if (code === "002") {
+        return;
+      }
+      console.warn(message);
+    };
+  }
+
   const onConnect = useCallback(
     (params: Edge | Connection) =>
       setEdges((eds) =>
@@ -91,6 +104,7 @@ const LayoutFlow = ({ initialNodes, initialEdges }: { initialNodes: Node[], init
     [nodes, edges, setDirection, setNodes, setEdges]
   );
 
+  //Getting rid of attributions in the bottom right corner
   const proOptions = { hideAttribution: true };
 
   return (
