@@ -104,7 +104,7 @@ export const PaginationControls = ({ totalPages }: {totalPages: number}) => {
     const className = clsx(
       'flex h-5 w-5 xsm:h-8 xsm:w-8 items-center justify-center rounded-full border',
       {
-        'pointer-events-none text-gray-300': isDisabled,
+        'pointer-events-none border-none text-gray-600 bg-gray-800': isDisabled,
         'hover:bg-gray-700': !isDisabled,
         'mr-2 md:mr-4': direction === 'left',
         'ml-2 md:ml-4': direction === 'right',

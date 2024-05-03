@@ -9,6 +9,7 @@
 }
 
 body {
+  user-select: none;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -41,7 +42,11 @@ body.baaam {
 }
 
 .layout-btn {
-  @apply px-3 flex border border-transparent outline-none ring-2 ring-neutral-800/50 shadow-lg shadow-neutral-600/50 hover:shadow-neutral-400/50 transition-shadow;
+  @apply px-3 flex border border-transparent outline-none ring-2 ring-neutral-800/50 shadow-lg shadow-neutral-600/50 hover:shadow-neutral-400/40 transition-shadow;
+}
+
+.active {
+  @apply shadow-md shadow-neutral-300/70 pointer-events-none transition-shadow;
 }
 
 .react-flow__node {

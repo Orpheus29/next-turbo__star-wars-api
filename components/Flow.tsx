@@ -23,7 +23,7 @@ import { FilmNode, HeroNode, StarshipNode } from '@/types/customNodes';
 
 import 'reactflow/dist/style.css';
 
-const nodeWidth = 220;
+const nodeWidth = 250;
 const nodeHeight = 200;
 
 const getLayoutedElements = (nodes: Node[], edges: Edge[], direction = 'LR') => {
@@ -65,7 +65,7 @@ const LayoutFlow = ({ initialNodes, initialEdges }: { initialNodes: Node[], init
   );
   const [nodes, setNodes, onNodesChange] = useNodesState(layoutedNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(layoutedEdges);
-  const [, setDirection] = useAtom(isHorizontalAtom);
+  const [dir, setDirection] = useAtom(isHorizontalAtom);
 
   //Fixing the "It looks like you have created a new nodeTypes or edgeTypes object..." bug
   const store = useStoreApi();
@@ -104,7 +104,7 @@ const LayoutFlow = ({ initialNodes, initialEdges }: { initialNodes: Node[], init
     [nodes, edges, setDirection, setNodes, setEdges]
   );
 
-  //Getting rid of attributions in the bottom right corner
+  //Getting rid of React Flow attributions in the bottom right corner
   const proOptions = { hideAttribution: true };
 
   return (
@@ -122,8 +122,8 @@ const LayoutFlow = ({ initialNodes, initialEdges }: { initialNodes: Node[], init
         fitView
       >
         <Panel position="top-right" className="flex flex-col gap-y-2 bg-black p-3 rounded-xl">
-          <button onClick={() => onLayout('LR')} className="layout-btn">horizontal layout</button>
-          <button onClick={() => onLayout('TB')} className="layout-btn">vertical layout</button>
+          <button onClick={() => onLayout('LR')} className={"layout-btn" + (dir ? " active" : "")}>horizontal layout</button>
+          <button onClick={() => onLayout('TB')} className={"layout-btn" + (!dir ? " active" : "")}>vertical layout</button>
         </Panel>
         <Controls />
       </ReactFlow>

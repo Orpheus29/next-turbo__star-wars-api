@@ -1,4 +1,3 @@
-import { atom } from 'jotai';
 import { getNodesAndEdgesProps } from '@/types';
 
 export const generatePagination = (currentPage: number, totalPages: number) => {
