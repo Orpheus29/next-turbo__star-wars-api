@@ -7,7 +7,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useAtom } from 'jotai';
 
 import { Flow } from '@/components/Flow';
-import { getNodesAndEdges } from '@/utils';
+import { generateNodesAndEdges } from '@/utils';
 import { heroNodesLengthAtom } from '@/utils/atoms';
 
 import { HeroDetailsProps } from '@/types';
@@ -28,8 +28,7 @@ export const HeroDetails = ({ hero, homeworld, allFilms, allStarships, isModalOp
   });
   const [, setNodesLength] = useAtom(heroNodesLengthAtom);
 
-  const initialNodes = (getNodesAndEdges({ hero, homeworld, heroStarshipsPerFilm, allStarships })[0] as Node[]);
-  const initialEdges = (getNodesAndEdges({ hero, homeworld, heroStarshipsPerFilm, allStarships })[1] as Edge[]);
+  const [initialNodes, initialEdges] = generateNodesAndEdges({ hero, homeworld, heroStarshipsPerFilm, allStarships }) as [Node[], Edge[]];
   setNodesLength(initialNodes.length);
 
   return (

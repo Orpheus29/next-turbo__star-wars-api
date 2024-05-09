@@ -1,4 +1,4 @@
-import { getNodesAndEdgesProps } from '@/types';
+import { generateNodesAndEdgesProps } from '@/types';
 
 export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the total number of pages is 7 or less,
@@ -33,12 +33,12 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
   ];
 };
 
-export const getNodesAndEdges = ({
+export const generateNodesAndEdges = ({
   hero,
   homeworld,
   heroStarshipsPerFilm,
   allStarships,
-}: getNodesAndEdgesProps) => {
+}: generateNodesAndEdgesProps) => {
   const {
     name,
     height,
@@ -83,7 +83,7 @@ export const getNodesAndEdges = ({
     },
   }));
 
-  let starshipNodesStartId = +filmsNodes[filmsNodes.length - 1].id + 1;
+  let starshipNodesStartId = filmsNodes.length + 2;
   let filmIncrement = starshipNodesStartId;
 
   const starshipsNodes = [];
@@ -109,7 +109,9 @@ export const getNodesAndEdges = ({
                 Class: ${starshipDetails.starship_class}<br/>
                 Model: ${starshipDetails.model}<br/>
                 Manufacturer: ${starshipDetails.manufacturer}<br/>
-                Cost: ${starshipDetails.cost_in_credits !== 'unknown' ? `${starshipDetails.cost_in_credits} ₵` : `${starshipDetails.cost_in_credits}`}<br/>
+                Cost: ${starshipDetails.cost_in_credits !== 'unknown'
+                  ? `${starshipDetails.cost_in_credits} ₵`
+                  : `${starshipDetails.cost_in_credits}`}<br/>
                 Length, m: ${starshipDetails.length}<br/>
                 Max atmosphering speed, km/h: ${starshipDetails.max_atmosphering_speed}<br/>
                 Hyperdrive rating: ${starshipDetails.hyperdrive_rating}<br/>

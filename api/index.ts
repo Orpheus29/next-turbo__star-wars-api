@@ -57,7 +57,7 @@ export const getFilms = cache(async () => {
     const response = await res.json();
     return response.results;
   } catch (error) {
-    console.error('Error fetching films:', error);
+    console.error('Error fetching episodes:', error);
   }
 });
 

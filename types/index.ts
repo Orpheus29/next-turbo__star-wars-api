@@ -79,7 +79,7 @@ export interface HeroDetailsProps {
   closeModal: () => void;
 }
 
-export interface getNodesAndEdgesProps {
+export interface generateNodesAndEdgesProps {
   hero: HeroProps;
   homeworld: string;
   heroStarshipsPerFilm: FilmAndStarshipsProps[];

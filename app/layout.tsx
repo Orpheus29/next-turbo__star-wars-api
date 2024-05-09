@@ -11,7 +11,7 @@ const starJedi = StarJedi(
     src: [
       { path: './fonts/Starjhol.ttf', weight: '100', },
       { path: './fonts/StarJedi.ttf', weight: '400', },
-      { path: './fonts/Stjedise.ttf', weight: '500', },
+      { path: './fonts/StarJediSpecialEdition.ttf', weight: '500', },
       { path: './fonts/Starjout.ttf', weight: '700' },
       { path: './fonts/Strjmono.ttf', weight: '800', },
     ],
